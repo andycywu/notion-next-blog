@@ -273,64 +273,59 @@ const nextConfig = {
       },
 
 
-      webpack: (config, { dev, isServer }) => {
-        // alias 專案根目錄
-        config.resolve.alias['@'] = path.resolve(__dirname)
-      
-        // 指定 theme components 正確路徑
-        config.resolve.alias['@theme-components'] = path.resolve(
-          __dirname,
-          'themes',
-          THEME,
-          'components'
-        )
-      
-        // 只在 client build 時印 log（可留可刪）
-        if (!isServer) {
-          console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
-        }
-      
-        return config
-      },  
+webpack: (config, { dev, isServer }) => {
+  // alias 專案根目錄
+  config.resolve.alias['@'] = path.resolve(__dirname)
 
+  // Theme components alias（關鍵）
+  config.resolve.alias['@theme-components'] = path.resolve(
+    __dirname,
+    'themes',
+    THEME,
+    'components'
+  )
 
-    // 性能优化配置
-    if (!dev) {
-      // 生产环境优化
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
-            },
-            common: {
-              name: 'common',
-              minChunks: 2,
-              chunks: 'all',
-              enforce: true,
-            },
+  // production 環境才做優化
+  if (!dev) {
+    config.optimization = {
+      ...config.optimization,
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
           },
-        },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            enforce: true
+          }
+        }
       }
     }
+  }
 
-    // Enable source maps in development mode
-    if (dev || process.env.NODE_ENV_API === 'development') {
-      config.devtool = 'eval-source-map'
-    }
+  // source map（開發或 API dev）
+  if (dev || process.env.NODE_ENV_API === 'development') {
+    config.devtool = 'eval-source-map'
+  }
 
-    // 优化模块解析
-    config.resolve.modules = [
-      path.resolve(__dirname, 'node_modules'),
-      'node_modules'
-    ]
+  // module resolve
+  config.resolve.modules = [
+    path.resolve(__dirname, 'node_modules'),
+    'node_modules'
+  ]
 
-    return config
-  },
+  if (!isServer) {
+    console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
+  }
+
+  return config
+},
+  
   experimental: {
     scrollRestoration: true,
     // 性能优化实验性功能
