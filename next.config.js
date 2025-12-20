@@ -271,6 +271,24 @@ const nextConfig = {
             //   }
         ]
       },
+
+webpack: (config, { dev, isServer }) => {
+  config.resolve.alias['@'] = path.resolve(__dirname)
+
+  if (!isServer) {
+    console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
+  }
+
+  config.resolve.alias['@theme-components'] = path.resolve(
+    __dirname,
+    'themes',
+    THEME,
+    'components'
+  )
+
+  return config
+}
+  
   webpack: (config, { dev, isServer }) => {
     // 动态主题：添加 resolve.alias 配置，将动态路径映射到实际路径
     config.resolve.alias['@'] = path.resolve(__dirname)
@@ -278,11 +296,12 @@ const nextConfig = {
     if (!isServer) {
       console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
     }
-    config.resolve.alias['@theme-components'] = path.resolve(
-      __dirname,
-      'themes',
-      THEME
-    )
+      config.resolve.alias['@theme-components'] = path.resolve(
+        __dirname,
+        'themes',
+        THEME,
+        'components'
+      )
 
     // 性能优化配置
     if (!dev) {
