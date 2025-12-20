@@ -272,36 +272,27 @@ const nextConfig = {
         ]
       },
 
-webpack: (config, { dev, isServer }) => {
-  config.resolve.alias['@'] = path.resolve(__dirname)
 
-  if (!isServer) {
-    console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
-  }
+      webpack: (config, { dev, isServer }) => {
+        // alias 專案根目錄
+        config.resolve.alias['@'] = path.resolve(__dirname)
+      
+        // 指定 theme components 正確路徑
+        config.resolve.alias['@theme-components'] = path.resolve(
+          __dirname,
+          'themes',
+          THEME,
+          'components'
+        )
+      
+        // 只在 client build 時印 log（可留可刪）
+        if (!isServer) {
+          console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
+        }
+      
+        return config
+      },  
 
-  config.resolve.alias['@theme-components'] = path.resolve(
-    __dirname,
-    'themes',
-    THEME,
-    'components'
-  )
-
-  return config
-}
-  
-  webpack: (config, { dev, isServer }) => {
-    // 动态主题：添加 resolve.alias 配置，将动态路径映射到实际路径
-    config.resolve.alias['@'] = path.resolve(__dirname)
-
-    if (!isServer) {
-      console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
-    }
-      config.resolve.alias['@theme-components'] = path.resolve(
-        __dirname,
-        'themes',
-        THEME,
-        'components'
-      )
 
     // 性能优化配置
     if (!dev) {
