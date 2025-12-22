@@ -281,8 +281,7 @@ webpack: (config, { dev, isServer }) => {
   config.resolve.alias['@theme-components'] = path.resolve(
     __dirname,
     'themes',
-    THEME,
-    'components'
+    THEME
   )
 
   // production 環境才做優化

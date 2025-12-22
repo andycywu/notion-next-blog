@@ -40,6 +40,9 @@ yarn-error.log*
 .idea
 .vscode
 
+# local editor history
+.history/
+
 
 # sitemap
 /public/robots.txt

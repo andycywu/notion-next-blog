@@ -1,5 +1,5 @@
 import BLOG, { LAYOUT_MAPPINGS } from '@/blog.config'
-import * as ThemeComponents from '../themes/medium/components'
+import * as ThemeComponents from '@theme-components'
 import getConfig from 'next/config'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
