@@ -274,15 +274,21 @@ const nextConfig = {
 
 
 webpack: (config, { dev, isServer }) => {
-  // alias 專案根目錄
-  config.resolve.alias['@'] = path.resolve(__dirname)
+  const themeName = THEME || BLOG.THEME
 
-  // Theme components alias（關鍵）
-  config.resolve.alias['@theme-components'] = path.resolve(
-    __dirname,
-    'themes',
-    THEME
-  )
+  // Ensure alias object exists and merge safely
+  config.resolve.alias = {
+    ...(config.resolve.alias || {}),
+    // alias 專案根目錄
+    '@': path.resolve(__dirname),
+    // Theme components alias（關鍵）: point directly to index entry
+    '@theme-components': path.resolve(
+      __dirname,
+      'themes',
+      themeName,
+      'index.js'
+    )
+  }
 
   // production 環境才做優化
   if (!dev) {
