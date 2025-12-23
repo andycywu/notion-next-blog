@@ -319,10 +319,10 @@ webpack: (config, { dev, isServer }) => {
   }
 
   // module resolve
-  config.resolve.modules = [
+ /* config.resolve.modules = [
     path.resolve(__dirname, 'node_modules'),
     'node_modules'
-  ]
+  ]*/
 
   if (!isServer) {
     console.log('[默认主题]', path.resolve(__dirname, 'themes', THEME))
