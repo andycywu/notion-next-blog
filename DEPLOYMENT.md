@@ -271,6 +271,72 @@ docker run -p 3000:3000 -e NOTION_PAGE_ID=your-id notionnext
 docker-compose up -d
 ```
 
+## Cloudflare Pages 部署
+
+Cloudflare Pages 是 Cloudflare 提供的静态网站托管服务，支持 Next.js 应用部署。
+
+### 快速开始
+
+1. **通过 Cloudflare Dashboard 部署（推荐）**
+   - 详细步骤请参考 [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md)
+   - 这是最简单的方式，适合大多数用户
+
+2. **使用 Wrangler CLI**
+   ```bash
+   # 安装 Wrangler
+   npm install -g wrangler
+   
+   # 登录 Cloudflare
+   wrangler login
+   
+   # 设置环境变量（Secrets）
+   wrangler pages secret put NOTION_PAGE_ID
+   wrangler pages secret put NOTION_TOKEN_V2  # 如果使用私有数据库
+   
+   # 部署
+   npm run build
+   wrangler pages deploy .next --project-name=notion-next-blog
+   ```
+
+### 环境变量配置
+
+**重要**：所有敏感信息必须在 Cloudflare Dashboard 中设置为 **Secret** 类型。
+
+#### 必需变量
+- `NOTION_PAGE_ID` - Notion 页面 ID（必需）
+
+#### 推荐配置
+- `NEXT_PUBLIC_CONTACT_LINKEDIN` - LinkedIn 链接（已默认设置为 https://www.linkedin.com/in/andycywu/）
+- `NEXT_PUBLIC_AUTHOR` - 作者名称
+- `NEXT_PUBLIC_BIO` - 作者简介
+- `NEXT_PUBLIC_LINK` - 网站地址
+- `NEXT_PUBLIC_TITLE` - 博客标题
+
+#### 敏感变量（必须设置为 Secret）
+- `NOTION_TOKEN_V2` - Notion API Token（如果使用私有数据库）
+- `NOTION_ACTIVE_USER` - Notion Active User（如果使用私有数据库）
+- `ALGOLIA_ADMIN_APP_KEY` - Algolia 管理密钥（如果使用 Algolia）
+- `AI_SUMMARY_API` - AI 摘要 API（如果使用）
+- `AI_SUMMARY_KEY` - AI 摘要密钥（如果使用）
+- `MAILCHIMP_API_KEY` - Mailchimp API 密钥（如果使用）
+- `REDIS_URL` - Redis 连接 URL（如果使用）
+
+### 配置步骤
+
+1. **在 Cloudflare Dashboard 中设置环境变量**
+   - 进入项目 Settings > Environment variables
+   - 为每个环境（Production、Preview、Development）添加变量
+   - 敏感信息选择 **Secret** 类型
+
+2. **使用 wrangler.toml 配置文件**
+   - 项目根目录已包含 `wrangler.toml` 配置文件
+   - 公共变量可以在配置文件中设置
+   - 敏感信息必须在 Dashboard 中设置为 Secret
+
+### 详细文档
+
+完整的 Cloudflare Pages 部署指南请参考：[CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md)
+
 ## 静态导出部署
 
 适用于 GitHub Pages、Cloudflare Pages 等静态托管服务。

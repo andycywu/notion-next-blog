@@ -1,0 +1,42 @@
+# Cloudflare Pages 配置文件
+# 用于部署 NotionNext Blog 到 Cloudflare Pages
+
+name = "notion-next-blog"
+compatibility_date = "2024-01-01"
+
+# 构建配置
+[build]
+command = "npm run build"
+cwd = "."
+
+# 环境变量配置
+# 注意：敏感信息（如 API keys）应该在 Cloudflare Dashboard 中设置为 Secrets
+# 而不是直接写在这个文件中
+# 
+# 在 Cloudflare Dashboard 中设置环境变量的步骤：
+# 1. 登录 Cloudflare Dashboard
+# 2. 进入 Pages 项目
+# 3. 进入 Settings > Environment variables
+# 4. 添加以下变量（选择 Secret 类型用于敏感信息）：
+#    - NOTION_PAGE_ID (必需)
+#    - NOTION_TOKEN_V2 (Secret，如果使用私有数据库)
+#    - NOTION_ACTIVE_USER (Secret，如果使用私有数据库)
+#    - ALGOLIA_ADMIN_APP_KEY (Secret，如果使用 Algolia)
+#    - AI_SUMMARY_API (Secret，如果使用 AI 摘要)
+#    - AI_SUMMARY_KEY (Secret，如果使用 AI 摘要)
+#    - MAILCHIMP_API_KEY (Secret，如果使用 Mailchimp)
+#    - REDIS_URL (Secret，如果使用 Redis)
+#    - NEXT_PUBLIC_CONTACT_LINKEDIN (已设置为 https://www.linkedin.com/in/andycywu/)
+#    - 以及其他 NEXT_PUBLIC_* 开头的公共变量
+
+# 生产环境变量（示例，实际值应在 Dashboard 中设置）
+[env.production.vars]
+NEXT_PUBLIC_CONTACT_LINKEDIN = "https://www.linkedin.com/in/andycywu/"
+
+# 预览环境变量
+[env.preview.vars]
+NEXT_PUBLIC_CONTACT_LINKEDIN = "https://www.linkedin.com/in/andycywu/"
+
+# 开发环境变量（本地开发时使用 .env.local 文件）
+[env.development.vars]
+NEXT_PUBLIC_CONTACT_LINKEDIN = "https://www.linkedin.com/in/andycywu/"
