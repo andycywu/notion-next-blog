@@ -51,7 +51,7 @@ yarn-error.log*
 /sitemap.xml
 
 # yarn
-package-lock.json
+# package-lock.json  # 需要提交到 Git 以便 Cloudflare 使用 npm ci
 # yarn.lock
 
 .notion-api-lock
