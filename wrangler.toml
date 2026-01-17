@@ -4,10 +4,10 @@
 # 注意：Cloudflare Pages 通过 Git 集成自动构建，不需要在此配置构建命令
 # 环境变量应在 Cloudflare Dashboard 中设置：
 # 1. 登录 https://dash.cloudflare.com/
-# 2. 进入 Pages > notion-next-blog > Settings > Environment variables
+# 2. 进入 Pages > blog-andycywu > Settings > Environment variables
 # 3. 添加环境变量（敏感信息选择 Secret 类型）
 
-name = "notion-next-blog"
+name = "blog-andycywu"
 compatibility_date = "2024-01-01"
 pages_build_output_dir = ".next"
 
@@ -35,7 +35,9 @@ pages_build_output_dir = ".next"
 # 注意：Cloudflare Pages 只支持 "production" 和 "preview" 环境
 [env.production.vars]
 NEXT_PUBLIC_CONTACT_LINKEDIN = "https://www.linkedin.com/in/andycywu/"
+NEXT_PUBLIC_LINK = "https://blog-andycywu.pages.dev"
 
 # 预览环境变量
 [env.preview.vars]
 NEXT_PUBLIC_CONTACT_LINKEDIN = "https://www.linkedin.com/in/andycywu/"
+NEXT_PUBLIC_LINK = "https://blog-andycywu.pages.dev"

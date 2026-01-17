@@ -5,7 +5,7 @@
 
 set -e
 
-PROJECT_NAME="notion-next-blog"
+PROJECT_NAME="blog-andycywu"
 BUILD_DIR=".next"
 
 echo "🚀 开始部署到 Cloudflare Pages..."

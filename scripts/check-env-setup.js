@@ -41,7 +41,7 @@ const recommendedEnvVars = {
     name: 'NEXT_PUBLIC_LINK',
     description: '网站地址',
     required: false,
-    example: 'https://notion-next-blog.andycywu.workers.dev',
+    example: 'https://blog-andycywu.pages.dev',
     current: process.env.NEXT_PUBLIC_LINK || BLOG.LINK || '未设置'
   },
   NEXT_PUBLIC_THEME: {

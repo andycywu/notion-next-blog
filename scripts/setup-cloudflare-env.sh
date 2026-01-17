@@ -3,7 +3,7 @@
 # Cloudflare Pages 环境变量设置脚本
 # 此脚本帮助您设置 Cloudflare Pages 项目的环境变量
 
-PROJECT_NAME="notion-next-blog"
+PROJECT_NAME="blog-andycywu"
 
 echo "🚀 Cloudflare Pages 环境变量设置"
 echo "=================================="
