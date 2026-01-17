@@ -9,7 +9,9 @@
 
 name = "blog-andycywu"
 compatibility_date = "2024-01-01"
-pages_build_output_dir = ".next"
+# 使用静态导出时，输出目录是 out
+# 使用 @cloudflare/next-on-pages 时，输出目录是 .vercel/output
+pages_build_output_dir = "out"
 
 # 环境变量配置
 # 注意：敏感信息（如 API keys）应该在 Cloudflare Dashboard 中设置为 Secrets
