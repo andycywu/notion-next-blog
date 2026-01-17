@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "cross-env BUILD_MODE=true next build",
+    "postbuild": "node scripts/clean-build.js",
     "start": "next start",
     "post-build": "next-sitemap --config next-sitemap.config.js",
     "build:corpus": "node scripts/generate-corpus.js",
